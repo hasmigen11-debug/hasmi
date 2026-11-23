@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HASMI</title>
+<meta name="theme-color" content="#F4F0E6">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="HASMI">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+  html,body{margin:0;height:100%;background:#F4F0E6;color:#38332E;
+    font-family:-apple-system,"Segoe UI","Noto Sans Thai",sans-serif}
+  .wrap{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:18px;padding:24px;box-sizing:border-box;text-align:center}
+  img{width:150px;height:150px;border-radius:50%;box-shadow:0 6px 24px rgba(56,51,46,.18)}
+  h1{margin:0;font-size:26px;letter-spacing:.12em}
+  p{margin:0;font-size:13px;color:#7B7468;max-width:300px;line-height:1.5}
+  .bar{width:140px;height:3px;background:#E0D7C5;border-radius:3px;overflow:hidden}
+  .bar i{display:block;height:100%;width:40%;background:#7A1E22;animation:go 1.1s ease-in-out infinite}
+  @keyframes go{0%{transform:translateX(-100%)}100%{transform:translateX(250%)}}
+  a.btn{display:none;padding:12px 22px;border-radius:10px;background:#7A1E22;color:#fff;
+    text-decoration:none;font-size:15px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <img src="icon-512.png" alt="HASMI">
+  <h1>HASMI</h1>
+  <p>Himpunan Anak Siswa Siswi Membantu Masyarakat Islam</p>
+  <div class="bar" id="bar"><i></i></div>
+  <p id="msg">กำลังเปิดแอป…</p>
+  <a class="btn" id="btn" href="#">เปิดแอป</a>
+</div>
+<script>
+  // ▼▼▼ วางลิงก์ /exec ของ Apps Script ตรงนี้ (ระหว่างเครื่องหมาย ' ') ▼▼▼
+  var APP_URL = 'วางลิงก์ตรงนี้';
+  // ▲▲▲ แก้แค่บรรทัดเดียวนี้ ▲▲▲
+
+  var ok = /^https:\/\/script\.google\.com\/.+\/exec/.test(APP_URL);
+  var btn = document.getElementById('btn');
+  if (!ok) {
+    document.getElementById('bar').style.display = 'none';
+    document.getElementById('msg').textContent = 'ยังไม่ได้ใส่ลิงก์แอป (APP_URL) ในไฟล์ index.html';
+  } else {
+    btn.href = APP_URL;
+    setTimeout(function(){ location.replace(APP_URL); }, 600);
+    setTimeout(function(){ btn.style.display = 'inline-block'; }, 4000);
+  }
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function(){});
+</script>
+</body>
+</html>
